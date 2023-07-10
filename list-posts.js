@@ -12,7 +12,7 @@ const getListPosts = (post, index) => {
         <img src="./assets/images/like-active.svg">
       </button>
       <p class="post-likes-text">
-        Нравится: <strong>2</strong>
+        Нравится: <strong>${post.likes.length}${post.likes.name}</strong>
       </p>
     </div>
     <p class="post-text">

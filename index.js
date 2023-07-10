@@ -112,9 +112,26 @@ const renderApp = () => {
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
         console.log("Добавляю пост...", { description, imageUrl });
-        goToPage(POSTS_PAGE);
+       // goToPage(POSTS_PAGE);
 
-        postPosts ({ token: getToken(), description, imageUrl });
+        postPosts ({ token: getToken(), description, imageUrl })
+        .then(() => {
+          goToPage(POSTS_PAGE);
+        })
+        .catch((error) => {
+
+          // В объекте error есть ключ message, в котором лежит сообщение об ошибке
+          // Если сервер сломался, то просим попробовать позже
+          if (error.message === "Сервер сломался") {
+            alert("Сервер сломался, попробуйте позже");
+            postPosts({ token: getToken(), description, imageUrl });
+          }  else {
+              alert('Кажется, у вас сломался интернет, попробуйте позже');
+              console.log(error);
+            }
+        });
+
+
       },
     });
   }

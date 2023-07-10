@@ -15,6 +15,8 @@ const getListPosts = (post, index) => {
         Нравится: <strong>${post.likes.length}${post.likes.name}</strong>
       </p>
     </div>
+    <div class="post-block">
+    <div>
     <p class="post-text">
       <span class="user-name">${post.user.name}</span>
       ${post.description}
@@ -22,6 +24,10 @@ const getListPosts = (post, index) => {
     <p class="post-date">
     ${post.createdAt}
     </p>
+    </div>
+    <button data-id=${post.id}   class="button delete-button">Удалить</button>
+    </div>
+    
   </li>`;
   }
   

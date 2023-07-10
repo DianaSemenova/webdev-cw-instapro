@@ -95,3 +95,16 @@ export const postPosts = ({ token, description, imageUrl }) => {
     })
 
 }
+
+//удаление
+export function deleteFetch({ token,id }) {
+  return fetch(postsHost + `/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+}

@@ -1,4 +1,4 @@
-import { getPosts, postPosts } from "./api.js";
+import { getPosts, postPosts , deleteFetch} from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -112,12 +112,11 @@ const renderApp = () => {
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
         console.log("Добавляю пост...", { description, imageUrl });
-       // goToPage(POSTS_PAGE);
-
+       goToPage(POSTS_PAGE);
         postPosts ({ token: getToken(), description, imageUrl })
-        .then(() => {
-          goToPage(POSTS_PAGE);
-        })
+        // .then(() => {
+        //   goToPage(POSTS_PAGE);
+        // })
         .catch((error) => {
 
           // В объекте error есть ключ message, в котором лежит сообщение об ошибке
@@ -147,6 +146,20 @@ const renderApp = () => {
     appEl.innerHTML = "Здесь будет страница фотографий пользователя";
     return;
   }
+
+
+
 };
 
 goToPage(POSTS_PAGE);
+
+export function deletePost({ id }) {
+  if (user) {
+    deleteFetch({ token: getToken() ,  id })
+    .then((responseData) => {
+     
+    return renderApp();
+    })
+  };
+};
+

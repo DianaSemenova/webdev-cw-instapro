@@ -2,6 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getListPosts } from "../list-posts.js"
+import { deletePost } from "../index.js"
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
@@ -33,5 +34,30 @@ export function renderPostsPageComponent({ appEl }) {
         userId: userEl.dataset.userId,
       });
     });
+  };
+
+
+
+  // const deletePost = () => {
+
+  const deleteButtons = document.querySelectorAll(".delete-button");
+
+  for (const deleteButton of deleteButtons) {
+    deleteButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const id = deleteButton.dataset.id;
+      console.log(id);
+
+      deletePost (id);
+
+     
+      // deleteFetch(token, id)
+      //   .then((responseData) => {
+      //     //comments = responseData.appComments;
+      //     return responseData;
+      //   });
+
+    });
   }
+// };
 }

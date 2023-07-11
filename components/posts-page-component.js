@@ -72,14 +72,14 @@ export function renderPostsPageComponent({ appEl }) {
     element: document.querySelector(".header-container"),
   });
 
-  for (let userEl of document.querySelectorAll(".post-header")) {
-    userEl.addEventListener("click", () => {
-      goToPage(USER_POSTS_PAGE, {
-        userId: userEl.dataset.userId,
-      });
-    });
-    //getLikePost();
-  };
+  // for (let userEl of document.querySelectorAll(".post-header")) {
+  //   userEl.addEventListener("click", () => {
+  //     goToPage(USER_POSTS_PAGE, {
+  //       userId: userEl.dataset.userId,
+  //     });
+  //   });
+  //   //getLikePost();
+  // };
 
 
   //удаление записи

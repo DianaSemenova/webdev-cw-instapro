@@ -34,6 +34,7 @@ export function renderPostsPageComponent({ appEl }) {
         userId: userEl.dataset.userId,
       });
     });
+
   };
 
 
@@ -43,8 +44,6 @@ export function renderPostsPageComponent({ appEl }) {
     deleteButton.addEventListener("click", (event) => {
       event.stopPropagation();
       const id = deleteButton.dataset.id;
-      console.log(id);
-
       deletePost (id);
     });
   }
@@ -62,7 +61,7 @@ export function renderPostsPageComponent({ appEl }) {
         const id = like.dataset.id;
         const liked = like.dataset.liked;
         
-       if (liked == 'true') {
+       if (liked == 'false') {
         putLikes (id);
        } else {
        removeLikes (id);

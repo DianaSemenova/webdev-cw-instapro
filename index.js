@@ -179,7 +179,7 @@ export function deletePost( id ) {
 
 
 export function putLikes( id ) {
-  if (user) {
+ // if (user) {
     toggleLike( id, { token: getToken() })
     .then(() => {
     renderApp();
@@ -187,11 +187,11 @@ export function putLikes( id ) {
     .catch((error) => {
       console.log(error.message);
     });
-  };
+  //};
 };
 
 export function removeLikes( id ) {
-  if (user) {
+ // if (user) {
     dislikeLike(id, { token: getToken() })
     .then(() => {
     renderApp();
@@ -199,5 +199,5 @@ export function removeLikes( id ) {
     .catch((error) => {
       console.log(error.message);
     });
-  };
+  //};
 };

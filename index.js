@@ -112,11 +112,11 @@ const renderApp = () => {
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
         console.log("Добавляю пост...", { description, imageUrl });
-       goToPage(POSTS_PAGE);
+       //goToPage(POSTS_PAGE);
         postPosts ({ token: getToken(), description, imageUrl })
-        // .then(() => {
-        //   goToPage(POSTS_PAGE);
-        // })
+         .then(() => {     
+           goToPage(POSTS_PAGE);
+         })
         .catch((error) => {
 
           // В объекте error есть ключ message, в котором лежит сообщение об ошибке

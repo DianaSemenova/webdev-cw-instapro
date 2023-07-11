@@ -38,6 +38,7 @@ export function renderPostsPageComponent({ appEl }) {
   };
 
 
+  //удаление записи
   const deleteButtons = document.querySelectorAll(".delete-button");
 
   for (const deleteButton of deleteButtons) {

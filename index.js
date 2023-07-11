@@ -1,4 +1,4 @@
-import { getPosts, postPosts , deleteFetch} from "./api.js";
+import { getPosts, postPosts , deleteFetch, fetchPostsUser} from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -71,7 +71,19 @@ export const goToPage = (newPage, data) => {
       console.log("Открываю страницу пользователя: ", data.userId);
       page = USER_POSTS_PAGE;
       posts = [];
-      return renderApp();
+
+      
+        return fetchPostsUser ( data.userId, { token: getToken() } )
+        .then((newPosts) => {
+          page = USER_POSTS_PAGE;
+          posts = newPosts;
+          return renderApp();
+        })
+        .catch((error) => {
+          console.error(error);
+          goToPage(POSTS_PAGE);
+        });
+      
     }
 
     page = newPage;
@@ -153,13 +165,14 @@ const renderApp = () => {
 
 goToPage(POSTS_PAGE);
 
-export function deletePost({ id }) {
-  if (user) {
-    deleteFetch({ token: getToken() ,  id })
-    .then((responseData) => {
-     
-    return renderApp();
+export function deletePost( id ) {
+ // if (user) {
+    deleteFetch({ token: getToken() },  id)
+    .then((newPosts) => {
+    posts = newPosts;
+    goToPage(POSTS_PAGE);
+    //return renderApp();
     })
-  };
+  //};
 };
 

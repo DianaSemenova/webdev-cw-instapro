@@ -97,8 +97,8 @@ export const postPosts = ({ token, description, imageUrl }) => {
 }
 
 //удаление
-export function deleteFetch({ token,id }) {
-  return fetch(postsHost + `/${id}`, {
+export function deleteFetch({ token } ,id ) {
+  return fetch(`${postsHost}/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
@@ -107,4 +107,25 @@ export function deleteFetch({ token,id }) {
       .then((response) => {
         return response.json();
       })
+}
+
+
+//получаем посты конкретного пользователя
+export function fetchPostsUser( { id }, { token }) {
+  return fetch(postsHost+`/user-posts/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      return data.posts;
+    });
 }

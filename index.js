@@ -69,19 +69,18 @@ export const goToPage = (newPage, data) => {
     if (newPage === USER_POSTS_PAGE) {
       // TODO: реализовать получение постов юзера из API
       console.log("Открываю страницу пользователя: ", data.userId);
-      page = USER_POSTS_PAGE;
-      posts = [];
-
+      page =  LOADING_PAGE;
+      //posts = [];
+      renderApp();   
       
         return fetchPostsUser ( data.userId, { token: getToken() } )
         .then((newPosts) => {
           page = USER_POSTS_PAGE;
           posts = newPosts;
-          return renderApp();
+          renderApp();
         })
         .catch((error) => {
           console.error(error);
-          goToPage(POSTS_PAGE);
         });
       
     }
@@ -156,7 +155,9 @@ const renderApp = () => {
   if (page === USER_POSTS_PAGE) {
     // TODO: реализовать страницу фотографию пользвателя
     appEl.innerHTML = "Здесь будет страница фотографий пользователя";
-    return;
+     return renderPostsPageComponent({
+      appEl,
+    });
   }
 
 
@@ -166,13 +167,12 @@ const renderApp = () => {
 goToPage(POSTS_PAGE);
 
 export function deletePost( id ) {
- // if (user) {
+  if (user) {
     deleteFetch({ token: getToken() },  id)
     .then((newPosts) => {
     posts = newPosts;
-    goToPage(POSTS_PAGE);
-    //return renderApp();
+    renderApp();
     })
-  //};
+  };
 };
 

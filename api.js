@@ -111,8 +111,8 @@ export function deleteFetch({ token } ,id ) {
 
 
 //получаем посты конкретного пользователя
-export function fetchPostsUser( { id }, { token }) {
-  return fetch(postsHost+`/user-posts/${id}`, {
+export function fetchPostsUser( id , { token }) {
+  return fetch(`${postsHost}/user-posts/${id}`, {
     method: "GET",
     headers: {
       Authorization: token,

@@ -37,9 +37,6 @@ export function renderPostsPageComponent({ appEl }) {
   };
 
 
-
-  // const deletePost = () => {
-
   const deleteButtons = document.querySelectorAll(".delete-button");
 
   for (const deleteButton of deleteButtons) {
@@ -49,15 +46,7 @@ export function renderPostsPageComponent({ appEl }) {
       console.log(id);
 
       deletePost (id);
-
-     
-      // deleteFetch(token, id)
-      //   .then((responseData) => {
-      //     //comments = responseData.appComments;
-      //     return responseData;
-      //   });
-
     });
   }
-// };
+
 }

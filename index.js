@@ -34,6 +34,22 @@ export const logout = () => {
 /**
  * Включает страницу приложения
  */
+
+
+function getAPI() {
+  return getPosts({ token: getToken() })
+    .then((newPosts) => {
+      page = POSTS_PAGE;
+      posts = newPosts;
+      renderApp();
+    })
+    .catch((error) => {
+      console.error(error);
+      goToPage(POSTS_PAGE);
+    });
+  }
+
+  
 export const goToPage = (newPage, data) => {
   if (
     [
@@ -53,17 +69,8 @@ export const goToPage = (newPage, data) => {
     if (newPage === POSTS_PAGE) {
       page = LOADING_PAGE;
       renderApp();
+     return getAPI();
 
-      return getPosts({ token: getToken() })
-        .then((newPosts) => {
-          page = POSTS_PAGE;
-          posts = newPosts;
-          renderApp();
-        })
-        .catch((error) => {
-          console.error(error);
-          goToPage(POSTS_PAGE);
-        });
     }
 
     if (newPage === USER_POSTS_PAGE) {
@@ -171,7 +178,7 @@ export function deletePost( id ) {
     deleteFetch({ token: getToken() },  id)
     .then((newPosts) => {
     posts = newPosts;
-    renderApp();
+    getAPI()
     })
   };
 };
@@ -182,11 +189,11 @@ export function putLikes( id ) {
   //if (user) {
     toggleLike( id, { token: getToken() })
     .then(() => {
-      //renderApp();
-      goToPage(POSTS_PAGE);
+      getAPI()
     })
     .catch((error) => {
       alert(error.message);
+      goToPage(AUTH_PAGE);
     });
   //};
 };
@@ -195,11 +202,11 @@ export function removeLikes( id ) {
   //if (user) {
     dislikeLike(id, { token: getToken() })
     .then(() => {
-      //renderApp();
-      goToPage(POSTS_PAGE);
+      getAPI()
     })
     .catch((error) => {
       alert(error.message);
+      goToPage(AUTH_PAGE);
     });
  //};
 };

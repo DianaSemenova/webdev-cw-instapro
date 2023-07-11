@@ -49,7 +49,7 @@ function getAPI() {
     });
   }
 
-  
+
 export const goToPage = (newPage, data) => {
   if (
     [
@@ -178,7 +178,8 @@ export function deletePost( id ) {
     deleteFetch({ token: getToken() },  id)
     .then((newPosts) => {
     posts = newPosts;
-    getAPI()
+    //return renderApp();
+      getAPI();
     })
   };
 };

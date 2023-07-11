@@ -143,7 +143,7 @@ export const toggleLike = (id, {token}) => {
     if (response.status === 200) {
       return response.json();
     }
-    throw new Error("Нет авторизации");
+    throw new Error("Лайкать посты могут только авторизованные пользователи");
   })
 }
 
@@ -158,6 +158,6 @@ export const dislikeLike = (id, {token}) => {
     if (response.status === 200) {
       return response.json();
     }
-    throw new Error("Нет авторизации");
+    throw new Error("Лайкать посты могут только авторизованные пользователи");
   })
 }

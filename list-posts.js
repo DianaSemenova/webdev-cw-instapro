@@ -8,11 +8,20 @@ const getListPosts = (post, index) => {
       <img class="post-image" src=${post.imageUrl}>
     </div>
     <div class="post-likes">
-      <button data-post-id=${post.id} class="like-button">
-        <img src="./assets/images/like-active.svg">
+      <button data-id=${post.id} data-liked="${post.isLiked}" class="like-button">
+
+      ${post.isLiked  ? `<img src="./assets/images/like-active.svg"></img>` 
+      : `<img src="./assets/images/like-not-active.svg"></img>`}
+        
       </button>
       <p class="post-likes-text">
-        Нравится: <strong>${post.likes.length}${post.likes.name}</strong>
+        Нравится: <strong>
+       
+        ${post.likes.length === 0 ? 0 : post.likes.length === 1 ? post.likes[0].name 
+          : post.likes[(post.likes.length-1)].name + ' и еще '+ (post.likes.length-1)}    
+
+       
+        </strong>
       </p>
     </div>
     <div class="post-block">
@@ -25,7 +34,7 @@ const getListPosts = (post, index) => {
     ${post.createdAt}
     </p>
     </div>
-    <button data-id=${post.id}   class="button delete-button">Удалить</button>
+    <button data-id=${post.id}  class="button delete-button">Удалить</button>
     </div>
     
   </li>`;

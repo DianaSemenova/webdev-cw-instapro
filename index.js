@@ -1,4 +1,4 @@
-import { getPosts, postPosts , deleteFetch, fetchPostsUser} from "./api.js";
+import { getPosts, postPosts , deleteFetch, fetchPostsUser, toggleLike, dislikeLike} from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -176,3 +176,28 @@ export function deletePost( id ) {
   };
 };
 
+
+
+export function putLikes( id ) {
+  if (user) {
+    toggleLike( id, { token: getToken() })
+    .then(() => {
+    renderApp();
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  };
+};
+
+export function removeLikes( id ) {
+  if (user) {
+    dislikeLike(id, { token: getToken() })
+    .then(() => {
+    renderApp();
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+  };
+};

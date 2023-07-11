@@ -2,7 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getListPosts } from "../list-posts.js"
-import { deletePost } from "../index.js"
+import { deletePost, putLikes, removeLikes } from "../index.js"
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
@@ -48,5 +48,30 @@ export function renderPostsPageComponent({ appEl }) {
       deletePost (id);
     });
   }
+
+
+
+
+  //счетчик лайков у каждого комментария
+  function getLikePost() {
+
+    const likesButton = document.querySelectorAll('.like-button');
+    for (const like of likesButton) {
+      like.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const id = like.dataset.id;
+        const liked = like.dataset.liked;
+        
+       if (liked == 'true') {
+        putLikes (id);
+       } else {
+       removeLikes (id);
+       }      
+
+      })
+    }
+  };
+  getLikePost();
+
 
 }

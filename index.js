@@ -50,7 +50,7 @@ function getAPI() {
   }
 
 
-export const goToPage = (newPage) => {
+export const goToPage = (newPage, data) => {
   if (
     [
       POSTS_PAGE,
